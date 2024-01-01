@@ -45,7 +45,7 @@ const Footer = () => {
 
         <p>{currentTime}</p>
 
-        <p><span className="font-medium text-[18px]">&copy;</span> {currentYear} Evently. All Rights reserved.</p>
+        <p><span className="text-[18px]">&copy;</span> {currentYear} Evently. All Rights reserved.</p>
       </div>
     </footer>
   )
