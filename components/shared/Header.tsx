@@ -1,7 +1,9 @@
-import { SignedOut } from "@clerk/nextjs"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../ui/button"
+import MobileNav from "./MobileNav"
+import NavItems from "./NavItems"
 
 const Header = () => {
   return (
@@ -14,9 +16,19 @@ const Header = () => {
           <Image src="/assets/images/logo.svg" alt="evently logo" width={128} height={38} />
         </Link>
 
+        <SignedIn>
+          <nav className="md:flex-between w-full max-w-xs hidden">
+            <NavItems />
+          </nav>
+        </SignedIn>
+
         <div className="w-32 flex items-center justify-end gap-3">
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+            <MobileNav />
+          </SignedIn>
           <SignedOut>
-            <Button asChild className=''>
+            <Button asChild className='rounded-full' size={'lg'}>
               <Link href={'/sign-in'}>
                 Login
               </Link>
