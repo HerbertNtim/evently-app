@@ -1,7 +1,9 @@
+import { Button } from "@/components/ui/button"
 import { getEventById } from "@/lib/actions/event.actions"
 import { formatDateTime } from "@/lib/utils"
 import { SearchParamProps } from "@/types"
 import Image from "next/image"
+import Link from "next/link"
 
 const EventDetails = async ({ params: { id } }: SearchParamProps) => {
   const event = await getEventById(id)
@@ -67,7 +69,9 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
             <div className="flex flex-col gap-2">
               <p className="p-bold-20 text-grey-600">What You'll Learn:</p>
               <p className="p-medium-16 lg:p-regular-18">{event.description}</p>
-              <p className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">{event.url}</p>
+              <Button className="p-medium-16 lg:p-regular-18 truncate my-4 py-4" size='lg' asChild>
+              <Link href={event.url} target="_blank" className="font-semibold">Join</Link>
+              </Button>
             </div>
           </div>
         </div>
