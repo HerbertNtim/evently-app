@@ -1,13 +1,23 @@
+import Collection from "@/components/shared/Collection"
 import { Button } from "@/components/ui/button"
-import { getEventById } from "@/lib/actions/event.actions"
+import { getEventById, getRelatedEventsByCategory } from "@/lib/actions/event.actions"
 import { formatDateTime } from "@/lib/utils"
 import { SearchParamProps } from "@/types"
+import { auth } from "@clerk/nextjs"
 import Image from "next/image"
 import Link from "next/link"
 
-const EventDetails = async ({ params: { id } }: SearchParamProps) => {
+const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
   const event = await getEventById(id)
-  console.log(event)
+  const { sessionClaims } = auth()
+  const userId = sessionClaims?.userId as string
+  
+  const relatedEvents = await getRelatedEventsByCategory({
+    categoryId: event.category._id,
+    eventId: event._id,
+    page: searchParams.page as string
+  })
+  
   return (
     <>
       <section className="flex justify-center bg-primary-50 bg-cover bg-dotted-pattern bg-center">
@@ -76,6 +86,21 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
           </div>
         </div>
       </section>
+
+      {/* EVENTS with the same category */}
+    <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
+      <h2 className="h2-bold">Related Events</h2>
+
+      <Collection 
+        data={relatedEvents?.data}
+        emptyTitle="No Events Found"
+        emptyStateSubtext="Come back later"
+        collectionType="All_Events"
+        limit={3}
+        page={searchParams.page as string}
+        totalPages={relatedEvents?.totalPages}
+      />
+    </section>
     </>
   )
 }
