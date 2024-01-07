@@ -3,15 +3,13 @@ import { Button } from "@/components/ui/button"
 import { getEventById, getRelatedEventsByCategory } from "@/lib/actions/event.actions"
 import { formatDateTime } from "@/lib/utils"
 import { SearchParamProps } from "@/types"
-import { auth } from "@clerk/nextjs"
 import Image from "next/image"
 import Link from "next/link"
+import CheckoutButton from '@/components/shared/CheckoutButton'
 
 const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
   const event = await getEventById(id)
-  const { sessionClaims } = auth()
-  const userId = sessionClaims?.userId as string
-  
+
   const relatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
     eventId: event._id,
@@ -52,6 +50,7 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
             </div>
 
             {/* CHECKOUT BUTTON */}
+            <CheckoutButton event={event} />
             
             <div className="flex gap-2 md:gap-3">
               <div className="flex gap-2 md:gap-3]:">
