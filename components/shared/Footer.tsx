@@ -13,7 +13,6 @@ const Footer = () => {
       setCurrentYear(new Date().getFullYear());
       setCurrentTime(getCurrentTime());
     }, 60000); // Update every minute to account for time zone changes
-    
 
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
@@ -43,9 +42,11 @@ const Footer = () => {
           />
         </Link>
 
-        <p>{currentTime}</p>
+        <div className="flex flex-1 flex-col md:flex-row justify-center items-center gap-10">
+          <p>{currentTime}</p>
 
-        <p><span className="text-[18px]">&copy;</span> {currentYear} Evently. All Rights reserved.</p>
+          <p><span className="text-[18px]">&copy;</span> {currentYear} Evently. All Rights reserved.</p>
+        </div>
       </div>
     </footer>
   )
