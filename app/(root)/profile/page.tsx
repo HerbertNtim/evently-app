@@ -20,8 +20,6 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
 
   const organizedEvents = await getEventsByUser({ userId, page: eventsPage })
 
-  console.log({orderedEvents})
-
   return (
     <>
       {/* My Tickets */}
