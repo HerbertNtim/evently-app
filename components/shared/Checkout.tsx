@@ -33,7 +33,7 @@ const Checkout = ({ event, userId }: { event: IEvent, userId: string }) => {
   }
 
   return (
-    <form action={onCheckout} method="post">
+    <form action={onCheckout} method="POST">
       <Button type="submit" role="link" size={'lg'} className="button w-fit">
         {event.isFree ? "Get Ticket" : "Buy Ticket"}
       </Button>
