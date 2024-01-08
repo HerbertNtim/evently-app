@@ -1,6 +1,6 @@
  <h3 align="center">A Full Stack Next 14 Events App</h3>
  <br/>
- ## <a href="https://evently-app-ivory.vercel.app/">Go Live Here</a>
+ ## <a href="https://evently-app-ivory.vercel.app/" target="_blank">Go Live Here</a>
 <div align="center">
   <br />
     <a href="https://evently-app-ivory.vercel.app/" target="_blank">
