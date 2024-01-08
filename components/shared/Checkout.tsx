@@ -8,6 +8,7 @@ import { checkoutOrder } from "@/lib/actions/order.actions";
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const Checkout = ({ event, userId }: { event: IEvent, userId: string }) => {
+  const isOrganizer = event.organizer._id as string
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -34,9 +35,11 @@ const Checkout = ({ event, userId }: { event: IEvent, userId: string }) => {
 
   return (
     <form action={onCheckout} method="POST">
-      <Button type="submit" role="link" size={'lg'} className="button w-fit">
+      {isOrganizer ? ' ' : 
+        <Button type="submit" role="link" size={'lg'} className="button w-fit">
         {event.isFree ? "Get Ticket" : "Buy Ticket"}
       </Button>
+      }
     </form>
   )
 }
